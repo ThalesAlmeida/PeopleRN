@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { View } from 'react-native';
 
 import Header from './src/components/Header';
 import PeopleList from './src/components/PeopleList'
@@ -30,7 +30,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View>
-        <Header title="Pessoas!"/>
+        <Header title="Contatos"/>
         <PeopleList peoples={this.state.peoples} />
       </View>
     );
