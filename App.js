@@ -7,14 +7,18 @@ import { capitalizeFirstLetter } from './src/components/utils'
 
 
 export default createStackNavigator({
+    'Main': {
+        screen: PeoplePage
+    },
+  
     'PeopleDetail': {
         screen: PeopleDetailPage,
         navigationOptions: ({ navigation }) => {
-        // const peopleName = capitalizeFirstLetter(
-        //     navigation.state.params.people.name.first
-        // );
+        const peopleName = capitalizeFirstLetter(
+            navigation.state.params.people.name.first
+        );
 
-        const peopleName = "@todo MUDAR ISSO"
+       
            return ({
                 title: peopleName,
                 headerTitleStyle: {
@@ -24,9 +28,7 @@ export default createStackNavigator({
             });
         }
     },
-    'Main': {
-        screen: PeoplePage
-    },
+    
 }, {
     navigationOptions: {
       title: 'Contatos',
