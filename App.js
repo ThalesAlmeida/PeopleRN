@@ -1,40 +1,47 @@
-import React from 'react';
-import { View } from 'react-native';
+import { createStackNavigator } from 'react-navigation';
 
-import Header from './src/components/Header';
-import PeopleList from './src/components/PeopleList'
+import PeoplePage from './src/pages/PeoplePage';
+import PeopleDetailPage from './src/pages/PeopleDetailPage';
 
-import axios from 'axios';
+import { capitalizeFirstLetter } from './src/components/utils'
 
-export default class App extends React.Component {
-  constructor(props){
-    super(props);
 
-    //Define um estado para o construtor
-    this.state = {
-      peoples: []
-    };
-  }
+export default createStackNavigator({
+    'Main': {
+        screen: PeoplePage
+    },
+  
+    'PeopleDetail': {
+        screen: PeopleDetailPage,
+        navigationOptions: ({ navigation }) => {
+        const peopleName = capitalizeFirstLetter(
+            navigation.state.params.people.name.first
+        );
 
-      componentDidMount(){
-        // Busca na api os dados dos usuários
-        axios.get('https://randomuser.me/api/?nat=br&results=5').then(response=>{
-          const { results } = response.data;
-          this.setState({
-            // Atribui o results a variável peoples
-            peoples: results
-          })
-        })    
+       
+           return ({
+                title: peopleName,
+                headerTitleStyle: {
+                    color: 'white',
+                    fontSize: 30,
+                }
+            });
+        }
+    },
+    
+}, {
+    navigationOptions: {
+      title: 'Contatos',
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: '#010a19',
+        borderBottomWidth: 1,
+        borderBottomColor: 'white',
+      },
+      headerTitleStyle: {
+          color: 'white',
+          fontSize: 30,
+          alignSelf: 'center',
+      }
     }
-
-  render() {
-    return (
-      <View>
-        <Header title="Contatos"/>
-        <PeopleList peoples={this.state.peoples} />
-      </View>
-    );
-  }
-}
-
-
+});

@@ -1,12 +1,19 @@
 import React from 'react';
+<<<<<<< HEAD
 import { Text, View, StyleSheet } from 'react-native';
+=======
+import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
+>>>>>>> dev
 
 import { capitalizeFirstLetter } from './utils';
 
 const PeopleListItem = props => {
-    const { people } = props;
+    const { people, navigateToPeopleDetail } = props;
     const { title, first, last } = people.name;
     return (
+        <TouchableOpacity onPress={() => {console.log('Clicou em mim', first);
+            navigateToPeopleDetail({ people });
+        }}>
         <View style={styles.line}>
             <Text style={styles.lineText}>
             { `${
@@ -19,6 +26,7 @@ const PeopleListItem = props => {
             }` }
             </Text>
         </View>
+        </TouchableOpacity>
     );
 }
 
